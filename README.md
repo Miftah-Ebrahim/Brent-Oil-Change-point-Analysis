@@ -7,6 +7,14 @@
 [![Flask](https://img.shields.io/badge/Flask-2.0%2B-green)](https://flask.palletsprojects.com/)
 [![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
 
+## 📸 Dashboard Preview
+
+![Dashboard Price Chart](/c:/Users/hp/Downloads/KAIM/KAIM%20WEEK%2011/Brent-Oil-Change-point-Analysis/dashboard_chart.png)
+*Interactive price chart showing detected change points and historical events*
+
+![Dashboard Events](/c:/Users/hp/Downloads/KAIM/KAIM%20WEEK%2011/Brent-Oil-Change-point-Analysis/dashboard_events.png)
+*Event timeline overlay correlating geopolitical shocks with price movements*
+
 ## 📊 Executive Summary
 
 This project analyzes **35+ years of Brent Oil prices** (1987-2022) to identify structural breaks and regime changes using **Bayesian Change Point Detection**. The analysis reveals key moments where political, economic, or supply-demand shocks fundamentally altered oil price dynamics.
