@@ -78,6 +78,7 @@ const Dashboard = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -112,37 +113,78 @@ const Dashboard = () => {
   const eventTypes = ['All', ...Array.from(new Set(events.map(e => e.type)))];
 
   return (
-    <div>
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        <Form.Label>Date Range:</Form.Label>
-        <Form.Control type="date" value={dateRange[0] || ''} onChange={e => setDateRange([e.target.value, dateRange[1]])} />
-        <Form.Control type="date" value={dateRange[1] || ''} onChange={e => setDateRange([dateRange[0], e.target.value])} />
-        <Form.Label>Event Type:</Form.Label>
-        <Form.Select value={eventType} onChange={e => setEventType(e.target.value)}>
-          {eventTypes.map(type => <option key={type}>{type}</option>)}
-        </Form.Select>
+    <div className="container-fluid p-4">
+      <h2 className="mb-4 text-center">Brent Oil Price Analysis Dashboard</h2>
+      
+      <div className="row mb-4">
+        <div className="col-md-4">
+          <Form.Label>Start Date:</Form.Label>
+          <Form.Control type="date" value={dateRange[0] || ''} onChange={e => setDateRange([e.target.value, dateRange[1]])} />
+        </div>
+        <div className="col-md-4">
+          <Form.Label>End Date:</Form.Label>
+          <Form.Control type="date" value={dateRange[1] || ''} onChange={e => setDateRange([dateRange[0], e.target.value])} />
+        </div>
+        <div className="col-md-4">
+          <Form.Label>Event Type:</Form.Label>
+          <Form.Select value={eventType} onChange={e => setEventType(e.target.value)}>
+            {eventTypes.map(type => <option key={type}>{type}</option>)}
+          </Form.Select>
+        </div>
       </div>
-      <Line data={chartData} options={options} height={350} />
-      {/* Annotate events */}
-      <ul style={{ marginTop: '1rem' }}>
-        {filteredEvents.map((e, i) => (
-          <li key={i}><b>{e.date}</b>: {e.description} ({e.type})</li>
-        ))}
-      </ul>
+
+      <div className="row mb-4">
+        <div className="col-12" style={{ height: '500px' }}>
+          <div className="card shadow-sm h-100">
+            <div className="card-body">
+              <Line data={chartData} options={options} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12">
+          <div className="card shadow-sm">
+            <div className="card-header bg-primary text-white">
+              <h5 className="mb-0">Historical Events Timeline</h5>
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                {filteredEvents.map((e, i) => (
+                  <li key={i} className="list-group-item">
+                    <span className="badge bg-secondary me-2">{e.date}</span>
+                    <strong>{e.description}</strong>
+                    <span className="badge bg-info text-dark ms-2">{e.type}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Modal for change point details */}
-      <Modal show={!!selectedCP} onHide={() => setSelectedCP(null)}>
+      <Modal show={!!selectedCP} onHide={() => setSelectedCP(null)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Change Point Details</Modal.Title>
+          <Modal.Title>Change Point Detected</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedCP && (
-            <div>
-              <p><b>Date:</b> {labels[selectedCP.index]}</p>
+            <div className="p-3">
+              <h4 className="text-center mb-3">{labels[selectedCP.index]}</h4>
               <p><b>Quantitative Impact:</b> {selectedCP.impact}</p>
-              <p><b>Associated Event:</b> {(() => {
+              <hr />
+              <p className="mb-1"><b>Correlated Key Event:</b></p>
+              {(() => {
                 const event = events.find(e => e.date === labels[selectedCP.index]);
-                return event ? `${event.description} (${event.type})` : 'None';
-              })()}</p>
+                return event ? (
+                  <div className="alert alert-warning">
+                    <strong>{event.description}</strong><br/>
+                    <small>Type: {event.type}</small>
+                  </div>
+                ) : <div className="text-muted">No specific event recorded on this exact date.</div>;
+              })()}
             </div>
           )}
         </Modal.Body>

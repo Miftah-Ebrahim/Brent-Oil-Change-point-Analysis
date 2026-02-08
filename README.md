@@ -46,7 +46,12 @@ Bayesian Change Point Detection **automatically identifies** when oil price beha
 
 ## 🔬 Methodology
 
-### 1. Exploratory Data Analysis (EDA)
+## 🔬 Methodology
+
+### 1. Analysis Workflow & Assumptions
+**Detailed Documentation**: [docs/WORKFLOW_AND_ASSUMPTIONS.md](docs/WORKFLOW_AND_ASSUMPTIONS.md)
+
+### 2. Exploratory Data Analysis (EDA)
 **Notebook**: `notebook/EDA.ipynb`
 
 - **Time Series Decomposition**: Trend, seasonality, and residuals
