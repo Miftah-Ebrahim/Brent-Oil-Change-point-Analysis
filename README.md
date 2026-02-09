@@ -259,7 +259,7 @@ This project is developed for educational purposes as part of **10 Academy's Wee
 ## 👤 Author
 
 **Miftah Ebrahim**  
-📧 Miftah6972@gmail.com  
+📧 miftah6972@gmail.com||miftahh.dev@gmail.com  
 🔗 [GitHub](https://github.com/Miftah-Ebrahim)
 
 ---
