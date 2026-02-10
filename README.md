@@ -241,7 +241,7 @@ The Bayesian model identified **major regime shifts** corresponding to:
 
 ---
 
-## 🚀 Future Work
+## Future Work
 
 1. **Real-Time Monitoring**: Deploy model to detect regime shifts in live data
 2. **Multivariate Extensions**: Include macroeconomic indicators (GDP, inflation)
